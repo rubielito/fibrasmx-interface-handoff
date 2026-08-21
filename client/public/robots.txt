@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /fibras-mx/portafolio
+Disallow: /fibras-mx/dashboard
+Sitemap: https://fibraspy-fnmapq49.manus.space/sitemap.xml
