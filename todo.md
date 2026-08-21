@@ -213,10 +213,10 @@
 - [x] Integrar recomendaciones algorítmicas en Videos de todas las fichas de FIBRAs.
 - [x] Mostrar relacionados debajo del video seleccionado y conservar la navegación entre videos.
 - [x] Verificar fichas, carrusel y responsive.
-- [ ] Auditar archivos sensibles y recursos necesarios antes de subir a GitHub.
-- [ ] Preparar README y guía de continuidad para el ingeniero.
-- [ ] Crear repositorio privado y publicar la copia limpia del proyecto.
-- [ ] Verificar el contenido del repositorio y entregar el enlace.
+- [x] Auditar archivos sensibles y recursos necesarios antes de subir a GitHub.
+- [x] Preparar README y guía de continuidad para el ingeniero.
+- [x] Crear repositorio privado y publicar la copia limpia del proyecto.
+- [x] Verificar el contenido del repositorio y entregar el enlace.
 
 
 
@@ -480,10 +480,10 @@
 - [x] Integrar recomendaciones algorítmicas en Videos de todas las fichas de FIBRAs.
 - [x] Mostrar relacionados debajo del video seleccionado y conservar la navegación entre videos.
 - [x] Verificar fichas, carrusel y responsive.
-- [ ] Auditar archivos sensibles y recursos necesarios antes de subir a GitHub.
-- [ ] Preparar README y guía de continuidad para el ingeniero.
-- [ ] Crear repositorio privado y publicar la copia limpia del proyecto.
-- [ ] Verificar el contenido del repositorio y entregar el enlace.
+- [x] Auditar archivos sensibles y recursos necesarios antes de subir a GitHub.
+- [x] Preparar README y guía de continuidad para el ingeniero.
+- [x] Crear repositorio privado y publicar la copia limpia del proyecto.
+- [x] Verificar el contenido del repositorio y entregar el enlace.
 
 
 
