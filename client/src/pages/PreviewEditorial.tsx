@@ -5,7 +5,7 @@ import { useLocalAuth } from "@/contexts/LocalAuthContext";
 import { getScopedStorageKey } from "@/lib/localAuth";
 import { getRecommendations, type RecommendationResult } from "@/lib/videoRecommendations";
 
-const croppedLogoByTicker: Record<string,string> = { FUNO:"/manus-storage/IMG_2657_4cda5a97.PNG", FIHO:"/manus-storage/IMG_2658_ab7f1cad.PNG", FIBRAMQ:"/manus-storage/IMG_2659_e172cb8b.PNG", SOMA:"/manus-storage/IMG_2660_b7de6606.PNG", FINN:"/manus-storage/IMG_2661_50348170.PNG", FSHOP:"/manus-storage/IMG_2662_1b383426.PNG", DANHOS:"/manus-storage/IMG_2663_32e7cd42.PNG", FIBRAPL:"/manus-storage/IMG_2664_c8fbad58.PNG", FMTY:"/manus-storage/IMG_2665_4b151030.PNG", FNOVA:"/manus-storage/IMG_2666_55873909.PNG", FPLUS:"/manus-storage/IMG_2667_b7bf4a8f.PNG", UPSITE:"/manus-storage/IMG_2668_548dcdc9.PNG", EDUCA:"/manus-storage/IMG_2669_8310bfba.PNG", STORAGE:"/manus-storage/IMG_2670_212b70e7.PNG", NEXT:"/manus-storage/IMG_2671_9b774356.PNG", FCFE:"/manus-storage/IMG_2672_2c065a3d.PNG" };
+const croppedLogoByTicker: Record<string,string> = { FUNO:"/manus-storage/IMG_2657.PNG", FIHO:"/manus-storage/IMG_2658.PNG", FIBRAMQ:"/manus-storage/IMG_2659.PNG", SOMA:"/manus-storage/IMG_2660.PNG", FINN:"/manus-storage/IMG_2661.PNG", FSHOP:"/manus-storage/IMG_2662.PNG", DANHOS:"/manus-storage/IMG_2663.PNG", FIBRAPL:"/manus-storage/IMG_2664.PNG", FMTY:"/manus-storage/IMG_2665.PNG", FNOVA:"/manus-storage/IMG_2666.PNG", FPLUS:"/manus-storage/IMG_2667.PNG", UPSITE:"/manus-storage/IMG_2668.PNG", EDUCA:"/manus-storage/IMG_2669.PNG", STORAGE:"/manus-storage/IMG_2670.PNG", NEXT:"/manus-storage/IMG_2671.PNG", FCFE:"/manus-storage/IMG_2672.PNG" };
 
 export const previewVideos = [
   { id:"sombras", title:"¿Qué es una FIBRA en México?", creator:"FIBRAS.MX · Guía", duration:"05:08", views:"61.4K vistas", image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85" },
@@ -29,22 +29,22 @@ export const previewVideos = [
 ];
 
 const previewFibers = [
-  { ticker:"FUNO", name:"Fibra Uno", sector:"Diversificado", logo:"/manus-storage/IMG_2657_4549bbcb.PNG", price:29.35, dividend:2.4 },
-  { ticker:"FIHO", name:"Fibra Hotel", sector:"Hotelero", logo:"/manus-storage/IMG_2658_55c31b74.PNG", price:7.52, dividend:.6 },
-  { ticker:"FIBRAMQ", name:"Fibra Macquarie", sector:"Industrial", logo:"/manus-storage/IMG_2659_a00a2856.PNG", price:42.65, dividend:2.45 },
-  { ticker:"SOMA", name:"Fibra Soma", sector:"Diversificado", logo:"/manus-storage/IMG_2660_4bf28057.PNG", price:18.9, dividend:1.15 },
-  { ticker:"FINN", name:"Fibra Inn", sector:"Hotelero", logo:"/manus-storage/IMG_2661_649824a2.PNG", price:4.8, dividend:.36 },
-  { ticker:"FSHOP", name:"Fibra Shop", sector:"Comercial", logo:"/manus-storage/IMG_2662_751d91d2.PNG", price:11.95, dividend:.67 },
-  { ticker:"DANHOS", name:"Danhos", sector:"Comercial", logo:"/manus-storage/IMG_2663_df8a0a91.PNG", price:28.45, dividend:1.8 },
-  { ticker:"FIBRAPL", name:"Fibra Prologis", sector:"Industrial", logo:"/manus-storage/IMG_2664_d1e7305c.PNG", price:74.51, dividend:4.07 },
-  { ticker:"FMTY", name:"Fibra Mty", sector:"Diversificado", logo:"/manus-storage/IMG_2665_cc4aed41.PNG", price:14.23, dividend:.49 },
-  { ticker:"FNOVA", name:"Fibra Nova", sector:"Industrial", logo:"/manus-storage/IMG_2666_b5b4f952.PNG", price:41.72, dividend:2.36 },
-  { ticker:"FPLUS", name:"Fibra Plus", sector:"Diversificado", logo:"/manus-storage/IMG_2667_db59dfbe.PNG", price:5.01, dividend:.09 },
-  { ticker:"UPSITE", name:"Fibra Upsite", sector:"Industrial", logo:"/manus-storage/IMG_2668_6f774556.PNG", price:31.5, dividend:1.2 },
-  { ticker:"EDUCA", name:"Fibra Educa", sector:"Educativo", logo:"/manus-storage/IMG_2669_0228b243.PNG", price:54, dividend:2.56 },
-  { ticker:"STORAGE", name:"Fibra Storage", sector:"Almacenaje", logo:"/manus-storage/IMG_2670_a4654862.PNG", price:23.87, dividend:2.42 },
-  { ticker:"NEXT", name:"Fibra Next", sector:"Industrial", logo:"/manus-storage/IMG_2671_a8c356f6.PNG", price:2.26, dividend:2.26 },
-  { ticker:"FCFE", name:"CFE Capital", sector:"Infraestructura", logo:"/manus-storage/IMG_2672_f5948ae8.PNG", price:24.71, dividend:2.1 },
+  { ticker:"FUNO", name:"Fibra Uno", sector:"Diversificado", logo:"/manus-storage/IMG_2657.PNG", price:29.35, dividend:2.4 },
+  { ticker:"FIHO", name:"Fibra Hotel", sector:"Hotelero", logo:"/manus-storage/IMG_2658.PNG", price:7.52, dividend:.6 },
+  { ticker:"FIBRAMQ", name:"Fibra Macquarie", sector:"Industrial", logo:"/manus-storage/IMG_2659.PNG", price:42.65, dividend:2.45 },
+  { ticker:"SOMA", name:"Fibra Soma", sector:"Diversificado", logo:"/manus-storage/IMG_2660.PNG", price:18.9, dividend:1.15 },
+  { ticker:"FINN", name:"Fibra Inn", sector:"Hotelero", logo:"/manus-storage/IMG_2661.PNG", price:4.8, dividend:.36 },
+  { ticker:"FSHOP", name:"Fibra Shop", sector:"Comercial", logo:"/manus-storage/IMG_2662.PNG", price:11.95, dividend:.67 },
+  { ticker:"DANHOS", name:"Danhos", sector:"Comercial", logo:"/manus-storage/IMG_2663.PNG", price:28.45, dividend:1.8 },
+  { ticker:"FIBRAPL", name:"Fibra Prologis", sector:"Industrial", logo:"/manus-storage/IMG_2664.PNG", price:74.51, dividend:4.07 },
+  { ticker:"FMTY", name:"Fibra Mty", sector:"Diversificado", logo:"/manus-storage/IMG_2665.PNG", price:14.23, dividend:.49 },
+  { ticker:"FNOVA", name:"Fibra Nova", sector:"Industrial", logo:"/manus-storage/IMG_2666.PNG", price:41.72, dividend:2.36 },
+  { ticker:"FPLUS", name:"Fibra Plus", sector:"Diversificado", logo:"/manus-storage/IMG_2667.PNG", price:5.01, dividend:.09 },
+  { ticker:"UPSITE", name:"Fibra Upsite", sector:"Industrial", logo:"/manus-storage/IMG_2668.PNG", price:31.5, dividend:1.2 },
+  { ticker:"EDUCA", name:"Fibra Educa", sector:"Educativo", logo:"/manus-storage/IMG_2669.PNG", price:54, dividend:2.56 },
+  { ticker:"STORAGE", name:"Fibra Storage", sector:"Almacenaje", logo:"/manus-storage/IMG_2670.PNG", price:23.87, dividend:2.42 },
+  { ticker:"NEXT", name:"Fibra Next", sector:"Industrial", logo:"/manus-storage/IMG_2671.PNG", price:2.26, dividend:2.26 },
+  { ticker:"FCFE", name:"CFE Capital", sector:"Infraestructura", logo:"/manus-storage/IMG_2672.PNG", price:24.71, dividend:2.1 },
 ];
 
 const ebookAd = { title: "12 secretos para crecer orgánicamente", author: "Rubiel Valencia Heleria", cover: "/manus-storage/ebook-12-secretos-cover_79a33bb7.png", pdf: "/manus-storage/ebook_12_secretos_rubiel_valencia_edicion_visual_premium_0f921a8f.pdf" };

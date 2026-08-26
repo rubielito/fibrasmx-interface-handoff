@@ -31,7 +31,7 @@ const data: Record<string, Fiber> = {
 const tabs: { id:Section; label:string; icon:typeof BarChart3 }[] = [
   { id:"resumen", label:"Resumen", icon:BarChart3 }, { id:"pagos", label:"Pagos", icon:CircleDollarSign }, { id:"valuacion", label:"Valuación", icon:PieChart }, { id:"ocupacion", label:"Ocupación", icon:WalletCards }, { id:"videos", label:"Videos", icon:Play }, { id:"reportes", label:"Reportes", icon:FileText },
 ];
-const railLogos = ["IMG_2657_4549bbcb.PNG","IMG_2658_55c31b74.PNG","IMG_2659_a00a2856.PNG","IMG_2660_4bf28057.PNG","IMG_2661_649824a2.PNG","IMG_2662_751d91d2.PNG","IMG_2663_df8a0a91.PNG","IMG_2664_d1e7305c.PNG","IMG_2665_cc4aed41.PNG","IMG_2666_b5b4f952.PNG","IMG_2667_db59dfbe.PNG","IMG_2668_6f774556.PNG","IMG_2669_0228b243.PNG","IMG_2670_a4654862.PNG","IMG_2671_a8c356f6.PNG","IMG_2672_f5948ae8.PNG"];
+const railLogos = ["IMG_2657.PNG","IMG_2658.PNG","IMG_2659.PNG","IMG_2660.PNG","IMG_2661.PNG","IMG_2662.PNG","IMG_2663.PNG","IMG_2664.PNG","IMG_2665.PNG","IMG_2666.PNG","IMG_2667.PNG","IMG_2668.PNG","IMG_2669.PNG","IMG_2670.PNG","IMG_2671.PNG","IMG_2672.PNG"];
 const railTickers = ["FUNO","FIHO","FIBRAMQ","SOMA","FINN","FSHOP","DANHOS","FIBRAPL","FMTY","FNOVA","FPLUS","UPSITE","EDUCA","STORAGE","NEXT","FCFE"];
 const logoByTicker: Record<string,string> = Object.fromEntries(railTickers.map((ticker,index) => [ticker, `/manus-storage/${railLogos[index]}`]));
 const years = [2026, 2025, 2024, 2023, 2022];
