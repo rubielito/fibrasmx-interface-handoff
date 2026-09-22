@@ -1,71 +1,55 @@
-/**
- * Independent FIBRAS.MX experience: educational dashboard, not a trading interface.
- * All visible market figures are labeled as illustrative reference data and should be
- * replaced by an authorized data source before production use.
- */
 import { useMemo, useState } from "react";
-import { BarChart3, BriefcaseBusiness, Calculator, ChevronDown, Download, Search, SlidersHorizontal, Sparkles } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, BarChart3, ChevronDown, ExternalLink, Menu, Search, SlidersHorizontal } from "lucide-react";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-const sectors = ["Todas", "Diversificado", "Industrial", "Comercial", "Hotelero", "Hipotecario", "Educativo", "Almacenaje", "Energía", "Infraestructura"];
 const fibers = [
-  { ticker: "FUNO", name: "Fibra Uno", sector: "Diversificado", price: "$29.35", change: "+1.07%", occupancy: "95.4%", yield: "7.88%", icon: "DV", tone: "red" },
-  { ticker: "FIBRAPL", name: "Prologis", sector: "Industrial", price: "$74.51", change: "+1.17%", occupancy: "97.0%", yield: "5.21%", icon: "IN", tone: "amber" },
-  { ticker: "FIBRAMQ", name: "Macquarie", sector: "Industrial", price: "$42.65", change: "−1.04%", occupancy: "96.0%", yield: "5.43%", icon: "IN", tone: "blue" },
-  { ticker: "DANHOS", name: "Danhos", sector: "Comercial", price: "$28.45", change: "−0.21%", occupancy: "93.5%", yield: "6.43%", icon: "CO", tone: "pink" },
-  { ticker: "FSHOP", name: "FShop", sector: "Comercial", price: "$11.95", change: "−0.25%", occupancy: "92.0%", yield: "—", icon: "CO", tone: "green" },
-  { ticker: "FINN", name: "Fibra Inn", sector: "Hotelero", price: "$4.80", change: "+0.84%", occupancy: "68.0%", yield: "7.48%", icon: "HO", tone: "purple" },
-  { ticker: "FIHO", name: "FibraHotel", sector: "Hotelero", price: "$7.52", change: "−1.83%", occupancy: "60.1%", yield: "8.11%", icon: "HO", tone: "teal" },
-  { ticker: "FMTY", name: "Fibra Mty", sector: "Diversificado", price: "$14.23", change: "+0.64%", occupancy: "96.0%", yield: "8.02%", icon: "DV", tone: "orange" },
-  { ticker: "FPLUS", name: "Fibra Plus", sector: "Diversificado", price: "$5.01", change: "−1.18%", occupancy: "93.1%", yield: "6.85%", icon: "DV", tone: "cyan" },
-  { ticker: "NEXT", name: "Fibra Next", sector: "Industrial", price: "$2.26", change: "—", occupancy: "97.7%", yield: "—", icon: "EN", tone: "yellow" },
-  { ticker: "FNOVA", name: "Fibra Nova", sector: "Industrial", price: "$41.72", change: "+0.14%", occupancy: "95.0%", yield: "5.42%", icon: "IN", tone: "slate" },
-  { ticker: "FHIPO", name: "FHipo", sector: "Hipotecario", price: "$14.00", change: "+1.01%", occupancy: "—", yield: "10.04%", icon: "HI", tone: "rose" },
-  { ticker: "EDUCA", name: "Educa", sector: "Educativo", price: "$54.00", change: "0.00%", occupancy: "98.0%", yield: "4.69%", icon: "ED", tone: "violet" },
-  { ticker: "STORAGE", name: "Storage", sector: "Almacenaje", price: "$23.87", change: "0.00%", occupancy: "83.5%", yield: "—", icon: "AL", tone: "gray" },
-  { ticker: "FCFE", name: "Fibra CFE", sector: "Energía", price: "$24.71", change: "−0.20%", occupancy: "—", yield: "8.54%", icon: "EN", tone: "gold" },
-  { ticker: "TERRA", name: "Terrafina", sector: "Industrial", price: "$1.20", change: "—", occupancy: "95.8%", yield: "—", icon: "IN", tone: "brown" },
-  { ticker: "FMX", name: "Fibra MX", sector: "Infraestructura", price: "$30.00", change: "−0.99%", occupancy: "—", yield: "—", icon: "IF", tone: "steel" },
+  { ticker: "AGRO22", name: "AgroFibra", sector: "Agroindustrial", price: 20.25, change: 0, volume: "1", high: "22.49", low: "20.25", yield: "—", tone: "olive" },
+  { ticker: "DANHOS13", name: "Danhos", sector: "Comercial", price: 29.16, change: -0.24, volume: "35K", high: "32.14", low: "24.83", yield: "0.07%", tone: "blue" },
+  { ticker: "EDUCA18", name: "Fibra Educa", sector: "Educativo", price: 52, change: 0, volume: "22", high: "59.01", low: "47.50", yield: "0.06%", tone: "violet" },
+  { ticker: "FCFE18", name: "CFE Fibra E", sector: "Energía", price: 24.95, change: -0.12, volume: "189K", high: "25.50", low: "21.56", yield: "0.10%", tone: "amber" },
+  { ticker: "FEXI21", name: "Fibra EXI", sector: "Infraestructura", price: 17.18, change: -3.97, volume: "95K", high: "21.00", low: "15.94", yield: "0.02%", tone: "red" },
+  { ticker: "FHIPO14", name: "FHipo", sector: "Hipotecario", price: 14.10, change: 0, volume: "80", high: "15.24", low: "12.56", yield: "0.13%", tone: "teal" },
+  { ticker: "FIBRAMQ12", name: "Fibra Macquarie", sector: "Industrial", price: 43.51, change: -0.34, volume: "4K", high: "47.00", low: "29.42", yield: "0.11%", tone: "slate" },
+  { ticker: "FIBRAPL14", name: "Prologis", sector: "Industrial", price: 74, change: 0.35, volume: "92K", high: "89.13", low: "70.16", yield: "0.05%", tone: "cyan" },
+  { ticker: "FIBRAUP18", name: "Upsite", sector: "Industrial", price: 35.80, change: -0.56, volume: "945", high: "41.00", low: "35.80", yield: "0.53%", tone: "orange" },
+  { ticker: "FIHO12", name: "Fibra Hotel", sector: "Hotelero", price: 7.59, change: 0.53, volume: "3K", high: "8.55", low: "6.90", yield: "0.08%", tone: "pink" },
+  { ticker: "FINN13", name: "Fibra Inn", sector: "Hotelero", price: 4.64, change: 1.53, volume: "9K", high: "5.78", low: "4.35", yield: "0.10%", tone: "green" },
+  { ticker: "FMTY14", name: "Fibra Mty", sector: "Diversificado", price: 14.07, change: 0.21, volume: "405K", high: "16.20", low: "13.35", yield: "0.08%", tone: "yellow" },
+  { ticker: "FNOVA17", name: "Fibra Nova", sector: "Industrial", price: 40.79, change: 0.27, volume: "5K", high: "40.79", low: "28.15", yield: "0.06%", tone: "brown" },
+  { ticker: "FPLUS16", name: "Fibra Plus", sector: "Diversificado", price: 5.04, change: 0, volume: "424", high: "6.33", low: "4.82", yield: "—", tone: "purple" },
+  { ticker: "FSHOP13", name: "Fibra Shop", sector: "Comercial", price: 11.82, change: -0.42, volume: "2K", high: "13.10", low: "7.90", yield: "0.08%", tone: "blue" },
+  { ticker: "FUNO11", name: "Fibra Uno", sector: "Diversificado", price: 29.31, change: 0, volume: "433K", high: "32.62", low: "26.00", yield: "0.11%", tone: "red" },
+  { ticker: "FVIA16", name: "Fibra E Vía", sector: "Infraestructura", price: 19.60, change: 0, volume: "2", high: "20.30", low: "18.43", yield: "0.09%", tone: "teal" },
+  { ticker: "HCITY17", name: "HC", sector: "Hotelero", price: 5.30, change: -1.85, volume: "2K", high: "7.24", low: "4.85", yield: "—", tone: "gray" },
+  { ticker: "NEXT25", name: "Fibra Next", sector: "Industrial", price: 96.50, change: 2.41, volume: "4K", high: "101.99", low: "89.55", yield: "0.07%", tone: "orange" },
+  { ticker: "SOMA21", name: "Fibra SOMA", sector: "Diversificado", price: 47.99, change: 0, volume: "8", high: "55.00", low: "45.00", yield: "—", tone: "violet" },
+  { ticker: "STORAGE18", name: "Fibra Storage", sector: "Almacenaje", price: 25.39, change: 0, volume: "3", high: "27.00", low: "23.79", yield: "0.04%", tone: "slate" },
+  { ticker: "VESTA15", name: "Vesta", sector: "Industrial", price: 57.06, change: -1.25, volume: "270K", high: "64.47", low: "47.42", yield: "0.03%", tone: "blue" },
 ];
 
-const featureCards = [
-  { icon: BarChart3, title: "Dashboard", copy: "Lee los indicadores principales del universo FIBRA y entiende qué significa cada dato.", href: "#explorar" },
-  { icon: SlidersHorizontal, title: "Comparador", copy: "Contrasta sectores, ocupación y rendimiento histórico con una mirada educativa.", href: "/fibras-mx/comparador" },
-  { icon: Calculator, title: "Calculadora", copy: "Explora escenarios hipotéticos sin convertirlos en una recomendación financiera.", href: "/fibras-mx/calculadora" },
-  { icon: BriefcaseBusiness, title: "Portafolio", copy: "Organiza tus instrumentos observados y aprende a dar seguimiento a sus métricas.", href: "#explorar" },
-];
+const history = [{ d: "L", v: 28.6 }, { d: "M", v: 29.1 }, { d: "X", v: 28.9 }, { d: "J", v: 29.5 }, { d: "V", v: 29.3 }, { d: "L", v: 29.8 }, { d: "M", v: 30.1 }, { d: "X", v: 29.6 }, { d: "J", v: 29.9 }, { d: "V", v: 30.3 }];
+const news = ["Fibra Mty prepara segunda oferta de adquisición", "Consumo de fibra en México: el déficit que afecta la salud", "Términos de la potencial segunda OPA de Fibra Mty", "Fibra Mty busca autorización de la CNBV para una segunda OPA"];
+
+function fmt(value: number) { return value.toFixed(2); }
+function linkFor(ticker: string) { return `/fibras-mx/fibra/${ticker}`; }
 
 export default function FibrasMx() {
   const [query, setQuery] = useState("");
-  const [sector, setSector] = useState("Todas");
-  const [showFilters, setShowFilters] = useState(false);
-  const filtered = useMemo(() => fibers.filter((fiber) => {
-    const matchesSector = sector === "Todas" || fiber.sector === sector;
-    const normalized = query.toLowerCase().trim();
-    return matchesSector && (!normalized || `${fiber.ticker} ${fiber.name} ${fiber.sector}`.toLowerCase().includes(normalized));
-  }), [query, sector]);
-
-  return <div className="mx-app">
-    <header className="mx-header">
-      <a href="/" className="mx-logo"><span />FIBRAS<span>.MX</span></a>
-      <nav className="mx-nav" aria-label="Navegación FIBRAS.MX"><a className="mx-home-link" href="/">Inicio</a>
-        <a className="active" href="/fibras-mx"><BarChart3 size={14} />FIBRAs</a>
-        <a href="/fibras-mx/dashboard">Dashboard</a><a href="/fibras-mx/comparador">Comparador</a><a href="/fibras-mx/calculadora">Calculadora</a><a href="/fibras-mx/portafolio">Portafolio</a>
-      </nav>
-      <div className="mx-market"><i /> BMV · México <ChevronDown size={12} /></div>
-    </header>
-    <div className="mx-market-ticker" aria-label="Símbolos FIBRA"><div>{[...fibers, ...fibers].map((fiber, index) => <span key={`${fiber.ticker}-${index}`}><i />{fiber.ticker}</span>)}</div></div>
-
-    <main className="mx-main">
-      <section className="mx-intro"><div><p className="mx-kicker">Centro educativo · Datos de referencia</p><h1>Explora el universo<br /><em>FIBRAs.</em></h1><p className="mx-description">Una herramienta para conocer los fideicomisos de inversión inmobiliaria, comparar sus sectores y aprender a leer sus principales indicadores.</p></div><div className="mx-notice"><Sparkles size={15} /><span>Información con fines<br />educativos únicamente</span></div></section>
-      <section className="mx-toolbar"><label className="mx-search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar FIBRA por nombre o ticker…" aria-label="Buscar FIBRA" /></label><button className="mx-filter-toggle" onClick={() => setShowFilters(!showFilters)}><SlidersHorizontal size={15} /> Filtros</button></section>
-      <section className={`mx-sector-tabs ${showFilters ? "open" : ""}`} aria-label="Filtrar por sector">{sectors.map((item) => <button key={item} className={sector === item ? "active" : ""} onClick={() => setSector(item)}>{item}</button>)}</section>
-
-      <section className="mx-summary"><div><span>Universo observado</span><strong>{fibers.length}</strong><small>instrumentos de referencia</small></div><div><span>Yield promedio</span><strong>7.01<span>%</span></strong><small>dato orientativo, no recomendación</small></div><div><span>Última lectura</span><strong>BMV</strong><small>fuente que debe verificarse antes de usar</small></div></section>
-
-      <section className="mx-feature-section" id="herramientas"><div className="mx-section-title"><div><p className="mx-kicker">Aprende con herramientas</p><h2>Entender antes<br /><em>de decidir.</em></h2></div><p>Recorre las herramientas para familiarizarte con el lenguaje del mercado inmobiliario cotizado.</p></div><div className="mx-feature-grid">{featureCards.map(({ icon: Icon, title, copy, href }) => <a href={href} className="mx-feature-card" key={title}><Icon size={21} /><h3>{title}</h3><p>{copy}</p><span>Explorar <span>↗</span></span></a>)}</div></section>
-
-      <section className="mx-catalog" id="explorar"><div className="mx-catalog-head"><div><p className="mx-kicker">Catálogo educativo</p><h2>Explorar FIBRAs</h2></div><button className="mx-csv" type="button" title="Exportación disponible en una siguiente versión"><Download size={14} /> CSV <small>{filtered.length}</small></button></div><div className="mx-results-note">{filtered.length} FIBRAs visibles {query || sector !== "Todas" ? "con los filtros seleccionados" : "en el catálogo de referencia"}</div><div className="mx-card-grid">{filtered.map((fiber) => <a className="mx-fiber-link" href={`/fibras-mx/fibra/${fiber.ticker}`} key={fiber.ticker}><article className="mx-fiber-card"><div className={`mx-fiber-icon ${fiber.tone}`}>{fiber.icon}</div><div className="mx-card-top"><span className="mx-sector">{fiber.sector}</span><span className={fiber.change.startsWith("+") ? "positive" : fiber.change.startsWith("−") ? "negative" : "neutral"}>{fiber.change}</span></div><h3>{fiber.ticker}</h3><p className="mx-fiber-name">{fiber.name}</p><div className="mx-price"><strong>{fiber.price}</strong><span>MXN</span></div><div className="mx-card-stats"><span>Ocup. <b>{fiber.occupancy}</b></span><span>Yield <b>{fiber.yield}</b></span></div><div className="mx-card-footer"><span className="mx-educational">Referencia educativa</span><span className="mx-status">VER FICHA ↗</span></div></article></a>)}</div>{filtered.length === 0 && <div className="mx-empty">No encontramos una FIBRA con esos filtros. Prueba otro nombre o sector.</div>}</section>
-    </main>
-    <footer className="mx-footer"><span>FIBRAS<span>.MX</span> — Centro educativo sobre fideicomisos inmobiliarios</span><span>Datos de referencia · Verifica siempre las fuentes</span></footer>
+  const [menu, setMenu] = useState(false);
+  const filtered = useMemo(() => fibers.filter(f => `${f.ticker} ${f.name} ${f.sector}`.toLowerCase().includes(query.toLowerCase().trim())), [query]);
+  const winners = [...fibers].filter(f => f.change > 0).sort((a, b) => b.change - a.change).slice(0, 5);
+  const losers = [...fibers].filter(f => f.change < 0).sort((a, b) => a.change - b.change).slice(0, 5);
+  return <div className="market-app">
+    <header className="market-header"><a className="market-logo" href="/"><span className="market-logo-mark">F</span><span>Fibras <b>Inmobiliarias</b></span></a><button className="market-menu" onClick={() => setMenu(v => !v)} aria-label="Abrir menú"><Menu size={20} /></button><nav className={menu ? "market-nav open" : "market-nav"}><a href="/">Inicio</a><a href="#universo">FIBRAs</a><a href="/fibras-mx/comparador">Comparar</a><a href="#noticias">Noticias</a><a href="/fibras-mx/calculadora">Calculadora</a><a href="/fibras-mx/portafolio">Portafolio</a></nav><div className="market-status"><i /> Mercado mexicano <ChevronDown size={14} /></div></header>
+    <div className="market-tape">{[...fibers.slice(0, 11), ...fibers.slice(0, 11)].map((f, i) => <a href={linkFor(f.ticker)} key={`${f.ticker}-${i}`}><b>{f.ticker}</b><span className={f.change >= 0 ? "up" : "down"}>{f.change >= 0 ? "+" : ""}{f.change.toFixed(2)}%</span></a>)}</div>
+    <main>
+      <section className="market-hero"><div><p className="market-eyebrow">Plataforma de análisis inmobiliario</p><h1>El universo de FIBRAs<br /><em>del mercado mexicano.</em></h1><p className="market-lead">Precios, fundamentales, distribuciones y noticias consolidadas en un solo lugar.</p></div><div className="market-hero-chart"><div className="chart-label"><span>FUNO11 · Último cierre</span><strong>$29.31</strong><small className="up">+0.00%</small></div><ResponsiveContainer width="100%" height={170}><AreaChart data={history}><defs><linearGradient id="heroFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#1f806b" stopOpacity={.35} /><stop offset="100%" stopColor="#1f806b" stopOpacity={0} /></linearGradient></defs><XAxis dataKey="d" hide /><YAxis hide domain={['dataMin - 1', 'dataMax + 1']} /><Tooltip contentStyle={{ background: "#102b26", border: 0, color: "#fff", borderRadius: 8 }} /><Area type="monotone" dataKey="v" stroke="#4fc0a2" strokeWidth={2.5} fill="url(#heroFill)" /></AreaChart></ResponsiveContainer></div></section>
+      <section className="market-content-grid"><div className="market-main-column">
+        <section className="market-panel winners-panel"><div className="market-panel-title"><div><p className="market-eyebrow">Sesión de mercado</p><h2>Ganadores y perdedores <em>del día</em></h2></div><span className="market-stale">● Datos de referencia</span></div><div className="market-movers"><div><h3 className="up">Ganadores</h3>{winners.map(f => <a href={linkFor(f.ticker)} key={f.ticker}><b>{f.ticker}</b><span>{f.name}</span><strong className="up">+{f.change.toFixed(2)}%</strong><ArrowUpRight size={14} /></a>)}</div><div><h3 className="down">Perdedores</h3>{losers.map(f => <a href={linkFor(f.ticker)} key={f.ticker}><b>{f.ticker}</b><span>{f.name}</span><strong className="down">{f.change.toFixed(2)}%</strong><ArrowDownRight size={14} /></a>)}</div></div></section>
+        <section className="market-panel universe-panel" id="universo"><div className="market-panel-title"><div><p className="market-eyebrow">Catálogo completo</p><h2>Universo <em>FIBRAs</em></h2></div><label className="market-search"><Search size={16} /><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Filtrar por ticker..." /></label></div><div className="market-count">{filtered.length} emisoras · BMV · MXN</div><div className="market-table-wrap"><table className="market-table"><thead><tr><th>Emisora</th><th>Precio</th><th>Var %</th><th>Volumen</th><th>Máx 52S</th><th>Mín 52S</th><th>Yield</th><th /></tr></thead><tbody>{filtered.map(f => <tr key={f.ticker}><td><a href={linkFor(f.ticker)} className="issuer"><span className={`issuer-logo ${f.tone}`}>{f.ticker.slice(0, 2)}</span><b>{f.ticker}</b><small>{f.name}</small></a></td><td className="price">{fmt(f.price)}</td><td className={f.change > 0 ? "up" : f.change < 0 ? "down" : "flat"}>{f.change > 0 ? "+" : ""}{f.change.toFixed(2)}%</td><td>{f.volume}</td><td>{f.high}</td><td>{f.low}</td><td>{f.yield}</td><td><a className="row-arrow" href={linkFor(f.ticker)} aria-label={`Ver ${f.ticker}`}><ArrowUpRight size={15} /></a></td></tr>)}</tbody></table></div></section>
+      </div><aside className="market-sidebar"><section className="market-news" id="noticias"><div className="market-panel-title"><div><p className="market-eyebrow">Actualidad</p><h2>Noticias <em>recientes</em></h2></div><a href="#noticias"><ExternalLink size={15} /></a></div>{news.map((item, i) => <a className="news-item" href="#noticias" key={item}><span>0{i + 1}</span><div><b>{item}</b><small>Fuente editorial · hace {i + 1} días</small></div></a>)}</section><section className="market-side-card"><BarChart3 size={20} /><h3>Herramientas para analizar</h3><p>Compara indicadores y crea tu propia lectura del mercado mexicano.</p><a href="/fibras-mx/comparador">Abrir comparador <ArrowUpRight size={14} /></a></section></aside></section>
+    </main><footer className="market-footer"><a className="market-logo" href="/"><span className="market-logo-mark">F</span><span>Fibras <b>Inmobiliarias</b></span></a><span>Datos de referencia · Verifica siempre las fuentes antes de usarlos</span><span>© 2026</span></footer>
   </div>;
 }
+
+export { fibers };
