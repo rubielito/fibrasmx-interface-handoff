@@ -5,6 +5,7 @@ import { Calculadora, Comparador } from "./pages/FibrasTools";
 import { Dashboard, Portfolio } from "./pages/FibrasOverview";
 import FibraDetail from "./pages/FibraDetail";
 import Home from "./pages/Home";
+import DividendosLanding from "./pages/DividendosLanding";
 import { LocalAuthGate, ProtectedPortfolio } from "./contexts/LocalAuthContext";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
     const section = allowed.includes(requested as typeof allowed[number]) ? requested as typeof allowed[number] : "resumen";
     return render(<FibraDetail ticker={ticker} initialSection={section} />);
   }
-  if (path === "/fibras-mx" || path === "/" || path.startsWith("/fibras-mx/")) return render(<FibrasMx />);
+  if (path === "/") return render(<DividendosLanding />);
+  if (path === "/fibras-mx" || path.startsWith("/fibras-mx/")) return render(<FibrasMx />);
   return render(<FibrasMx />);
 }

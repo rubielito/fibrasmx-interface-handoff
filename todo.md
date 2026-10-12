@@ -547,3 +547,13 @@
 - [x] Agregar bloques de videos recientes y últimos videos.
 - [x] Simular proveedor externo sin conectar todavía Vimeo u otro servicio.
 - [x] Verificar la vista móvil y desktop.
+
+
+## Nueva portada inspirada en +dividendos
+- [x] Crear una portada propia con hero, navegación y CTA hacia la plataforma FIBRAS.MX.
+- [x] Añadir tarjetas de productos para calendario, análisis y recursos.
+- [x] Añadir calendario de pagos de muestra con enlaces a fichas educativas.
+- [x] Añadir metodología de observación, comparación y verificación.
+- [x] Añadir formulario local de suscripción con confirmación visual.
+- [x] Mantener advertencia visible de educación financiera y no asesoría.
+- [x] Añadir manifiesto de rutas públicas para la aplicación.
